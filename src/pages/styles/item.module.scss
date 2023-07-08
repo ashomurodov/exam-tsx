@@ -9,6 +9,12 @@
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
+  button {
+    width: 200px;
+    height: 30px;
+    color: #000;
+    background-color: rgb(255, 169, 56);
+  }
 }
 
 .img__container {

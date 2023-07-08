@@ -18,6 +18,7 @@ interface HomeState {
   currentCategoria: string;
   productsShowType: ShowType;
   search: string;
+  sortByPrice: boolean;
 }
 
 export default class Home extends Component<HomeProps, HomeState> {
@@ -28,6 +29,7 @@ export default class Home extends Component<HomeProps, HomeState> {
     currentCategoria: "all",
     productsShowType: "gallery",
     search: "",
+    sortByPrice: false,
   };
 
   async componentDidMount() {
@@ -46,6 +48,10 @@ export default class Home extends Component<HomeProps, HomeState> {
     this.setState({ search });
   };
 
+  changeSortbyAZ = () => {
+    this.setState({ sortByPrice: !this.state.sortByPrice });
+  };
+
   render() {
     const { isLoading } = this.state;
     if (isLoading)
@@ -55,10 +61,16 @@ export default class Home extends Component<HomeProps, HomeState> {
         </div>
       );
 
-    const { categories, currentCategoria, products, productsShowType, search } = this.state;
+    const { categories, currentCategoria, products, productsShowType, search, sortByPrice } = this.state;
 
     const filteredProducts =
       currentCategoria === "all" ? products : products.filter((product) => product.category === currentCategoria);
+
+    let productData = [...filteredProducts];
+
+    if (sortByPrice) {
+      productData = productData.sort((a, b) => a.brand.localeCompare(b.brand));
+    }
 
     const searchedProducts = filteredProducts.filter((product) => product.brand.toLowerCase().includes(search.toLowerCase()));
     return (
@@ -76,6 +88,7 @@ export default class Home extends Component<HomeProps, HomeState> {
           <p>{searchedProducts.length} Products Found</p>
           <div className="sort__selection">
             <p>Sort by:</p>
+            <button onClick={this.changeSortbyAZ}>A-Z</button>
           </div>
         </div>
         <div className="row">
@@ -87,7 +100,7 @@ export default class Home extends Component<HomeProps, HomeState> {
             />
           </div>
           <div className="col">
-            <Products addToken={this.props.addToken} products={searchedProducts} pageShowType={productsShowType} />
+            <Products addToken={this.props.addToken} products={productData} pageShowType={productsShowType} />
           </div>
         </div>
       </div>
