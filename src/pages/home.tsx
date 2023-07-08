@@ -72,7 +72,7 @@ export default class Home extends Component<HomeProps, HomeState> {
       productData = productData.sort((a, b) => a.brand.localeCompare(b.brand));
     }
 
-    const searchedProducts = filteredProducts.filter((product) => product.brand.toLowerCase().includes(search.toLowerCase()));
+    const searchedProducts = productData.filter((product) => product.brand.toLowerCase().includes(search.toLowerCase()));
     return (
       <div className="container my-3">
         <div className="top__settings mb-4">
@@ -100,7 +100,7 @@ export default class Home extends Component<HomeProps, HomeState> {
             />
           </div>
           <div className="col">
-            <Products addToken={this.props.addToken} products={productData} pageShowType={productsShowType} />
+            <Products addToken={this.props.addToken} products={searchedProducts} pageShowType={productsShowType} />
           </div>
         </div>
       </div>
