@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Home from "./pages/home";
+import Item from "./pages/item";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface AppState {
+  token: string;
 }
 
-export default App;
+export default class App extends Component<{}, AppState> {
+  state: AppState = {
+    token: "",
+  };
+
+  addToken = (token: string) => {
+    this.setState({ token });
+    localStorage.setItem("token", token);
+  };
+
+  deleteToken = () => {
+    localStorage.removeItem("token");
+    this.setState({ token: "" });
+  };
+
+  componentDidMount() {
+    const token = localStorage.getItem("token") ? localStorage.getItem("token") : "";
+    if (token?.length) this.setState({ token });
+  }
+  render() {
+    const { token } = this.state;
+
+    if (token)
+      return (
+        <div className="App d-flex justify-content-center">
+          <Item token={token} deleteToken={this.deleteToken} />
+        </div>
+      );
+
+    return (
+      <div className="App d-flex justify-content-center">
+        <Home addToken={this.addToken} />
+      </div>
+    );
+  }
+}

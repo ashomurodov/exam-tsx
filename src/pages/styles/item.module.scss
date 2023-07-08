@@ -1,0 +1,47 @@
+.item__container {
+  display: flex;
+  gap: 20px;
+  padding: 100px 200px;
+}
+
+.left__side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.img__container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.current__image {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.small__images {
+  display: flex;
+  gap: 5px;
+
+  img {
+    width: 100px;
+    height: 50px;
+    object-fit: cover;
+    border: 2px solid #000;
+  }
+}
+
+.right__side {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  span {
+    color: rgb(255, 162, 0);
+  }
+}

@@ -1,0 +1,11 @@
+.gallery {
+  //   background-color: aqua;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.list {
+  //   background-color: red;
+  display: grid;
+  grid-template-columns: 1fr;
+}

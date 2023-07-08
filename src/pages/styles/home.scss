@@ -1,0 +1,24 @@
+.top__settings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .type__selection {
+    display: flex;
+    gap: 20px;
+
+    button {
+      width: 70px;
+      height: 30px;
+      border: none;
+      background-color: beige;
+      color: #000;
+      border: 1px solid #0f0f0f;
+      transition: all 0.3s ease;
+
+      &:active {
+        scale: 1.1;
+      }
+    }
+  }
+}
